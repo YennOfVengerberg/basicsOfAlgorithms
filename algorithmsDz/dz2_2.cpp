@@ -42,7 +42,5 @@ int main() {
         } else {
             cout << count_in_range(prefix_sum, l, r); 
         }
-
     }
-
 }

@@ -32,9 +32,6 @@ int main() {
         cin >> vec[i];
     }
     sort(vec.begin(), vec.end());
-    cout << "введите ключ " << endl;
-    int key;
-    cin >> key;
     int pairs = 0;
     for(int i = 0; i < vec.size();i++) {
         if(binary_search(vec, 0, n-1, vec[i], S)) pairs++;

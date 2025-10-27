@@ -3,7 +3,7 @@
 using namespace std;
 
 // Функция вычисляет количество интересующих пар и одновременно сортирует массив
-long long merge_and_count(vector<int>& arr, int left, int mid, int right) {
+long long merge_and_count(vector<int> &arr, int left, int mid, int right) {
     vector<int> temp(right - left + 1); // Временный буфер для объединения
     
     int i = left, j = mid + 1, k = 0;
