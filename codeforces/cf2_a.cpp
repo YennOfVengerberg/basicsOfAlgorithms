@@ -29,20 +29,29 @@ int main() {
         for(int i = 0; i < size; i++) {
             cin >> vec[i];
         }
-        int temp = 0;
+        int otr = 0;
         int result = 0;
+        int maxim = 0;
+        int minim = 10000000;
         for(int i = 0; i < size; i++) {
             for(int j = i+1; j < size; j++) {
-                vector<int> vec_copy = vec;
-                vector<int> vec_copy2 = vec;
-                vec_copy.erase(vec.begin()+i, vec.begin() + j);
-                vec_copy2.erase(vec.begin() + j+1, vec.end());
-                temp = maxim(vec_copy2) - minim(vec_copy2);
-                result = maxim(vec_copy) - minim(vec_copy); 
-                //temp = *max_element(vec.begin()+i, vec.begin() + j) - *min_element(vec.begin()+i, vec.begin() + j);
+                maxim = max(*max_element(vec.begin(), vec.begin() + i), *max_element(vec.begin()+j, vec.end()));
+                minim = min(*min_element(vec.begin(), vec.begin() + i), *min_element(vec.begin()+j, vec.end()));
+                otr = *max_element(vec.begin()+i, vec.begin() + j) - *min_element(vec.begin()+i, vec.begin() + j);
                 //result = max(max(result, temp), maxim(vec_copy) - minim(vec_copy)) ;
             }
         }
-        cout << endl << result + temp ;
+        cout << endl << result + otr;
     }
 }
+/* 
+4
+8
+1 2 2 3 1 5 6 1
+5
+1 2 3 100 200
+4
+3 3 3 3
+6
+7 8 3 1 1 8
+*/

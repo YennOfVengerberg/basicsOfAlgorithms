@@ -2,6 +2,8 @@
 #include <vector>
 #include <random>
 #include <chrono>
+#include <cmath>
+#include <algorithm>
 
 using namespace std;
 
@@ -57,29 +59,36 @@ void modifiedMergeSort(vector<int> &vec, int left, int right, int threshold)
 
 int main()
 {
-    vector<int> vec;
     int n;
-    cout << "Введите число элементов: ";
-    cin >> n;
     double threshold = 0;
     mt19937 mt(time(0));
-    for(int i = 0; i < n; i++) {
-        vec.push_back(mt() % 10000); // лимит 10000 для примера, 10^7
-        //cout << vec[i] << " ";
-    }
-    chrono::duration<double> before = 24h;
-    for(int i = 1; i < sqrt(n); i++) {
-        auto start = chrono::steady_clock::now();
-        vector<int> vec_copy = vec;
-        modifiedMergeSort(vec_copy, 0, n - 1, i);
-        auto end = chrono::steady_clock::now();
-        chrono::duration<double> elapsed = end - start;
-        if (elapsed < before) {
-            before = elapsed;
-            threshold = i;
-            cout << before.count() << " "<< threshold << endl;
+    
+    for(int n = 1000; n < pow(10,7); n *= 10) {
+        vector<int> vec;
+        for(int i = 0; i < n; i++) {
+            vec.push_back(mt() % 10000); // лимит 10000 для примера, 10^7
+            //cout << vec[i] << " ";
+        }
+        chrono::duration<double> before = 24h;
+        for(int i = 1; i < 1000; i++) { // i < 1000; for n up to 10^6; sort = modifiedsort
+            auto start = chrono::steady_clock::now();
+            vector<int> vec_copy = vec;
+            modifiedMergeSort(vec_copy, 0, n - 1, i);
+            auto end = chrono::steady_clock::now();
+            chrono::duration<double> elapsed = end - start;
+            sort(vec.begin(), vec.end());
+            if (elapsed < before && vec_copy == vec) {
+                before = elapsed;
+                threshold = i;
+                cout << before.count() << " "<< threshold << endl;
+            }
+            else if (vec_copy != vec) {
+                cerr << "Ошибка сортировки!" << endl;
+                break;
+            }
         }
     }
+    
     //cout << endl << "Отсортированный массив: "; 
     //for (int i = 0; i < n; i++) cout << vec[i] << " ";
     cout << endl << " граница " << threshold;
