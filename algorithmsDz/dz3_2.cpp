@@ -3,17 +3,16 @@
 using namespace std;
 
 // Функция вычисляет количество интересующих пар и одновременно сортирует массив
-long long merge_and_count(vector<int> &arr, int left, int mid, int right) {
+int merge_and_count(vector<int> &arr, int left, int mid, int right) {
     vector<int> temp(right - left + 1); // Временный буфер для объединения
     
     int i = left, j = mid + 1, k = 0;
-    long long count = 0;
+    int count = 0;
     
     while(i <= mid && j <= right) {
         if(arr[i] <= arr[j]) { // Элементы расположены правильно
             temp[k++] = arr[i++];
-        }
-        else { // Здесь возникает интересная пара
+        } else { // Здесь возникает интересная пара
             temp[k++] = arr[j++];
             count += (mid - i + 1); // Все элементы слева больше текущего элемента справа
         }
@@ -34,18 +33,18 @@ long long merge_and_count(vector<int> &arr, int left, int mid, int right) {
 }
 
 // Рекурсивная функция разделения массива и подсчета пар
-long long count_pairs(vector<int>& arr, int left, int right) {
+int count_pairs(vector<int> &arr, int left, int right) {
     if(left >= right)
         return 0;
     
     int mid = left + (right - left)/2;
     
     // Подсчет пар внутри двух половинок
-    long long x = count_pairs(arr, left, mid);
-    long long y = count_pairs(arr, mid+1, right);
+    int x = count_pairs(arr, left, mid);
+    int y = count_pairs(arr, mid+1, right);
     
     // Объединение и подсчет перекрестных пар
-    long long z = merge_and_count(arr, left, mid, right);
+    int z = merge_and_count(arr, left, mid, right);
     
     return x+y+z;
 }
@@ -53,12 +52,9 @@ long long count_pairs(vector<int>& arr, int left, int right) {
 int main() {
     int n;
     cin >> n;
-    vector<int> arr(n);
+    vector<int> arr; // = {1, 325, 654, 23, 748, 123, 67, 164, 120} ; 0 + 5 + 5 + 0 + 4 +2 + 1 = 17 
     
     for(int i=0; i<n; ++i)
-        cin >> arr[i];
-    
-    cout << "Количество интересных пар: " << count_pairs(arr, 0, n-1) << endl;
-    
-    return 0;
+        cin >> arr[i]; 
+    cout << "Количество интересных пар: " << count_pairs(arr, 0, arr.size()-1) << endl;
 }

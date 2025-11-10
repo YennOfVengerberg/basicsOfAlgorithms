@@ -16,12 +16,11 @@ void merge(vector<int> &vec, int left, int mid, int right) {
     for (int j = 0; j < size2; j++) rightVec[j] = vec[mid + 1 + j];
     int i = 0, j = 0, k = left;
 
-    while (i < size1 && j < size2){
-        if (leftVec[i] <= rightVec[j]){
+    while (i < size1 && j < size2) {
+        if (leftVec[i] <= rightVec[j]) {
             vec[k] = leftVec[i];
             i++;
-        }
-        else{
+        } else {
             vec[k] = rightVec[j];
             j++;
         }
@@ -68,7 +67,7 @@ int main()
         vec.push_back(mt() % 10000); // лимит 10000 для примера, 10^7
         //cout << vec[i] << " ";
     }
-    chrono::duration<double> before = 1h;
+    chrono::duration<double> before = 24h;
     for(int i = 1; i < sqrt(n); i++) {
         auto start = chrono::steady_clock::now();
         vector<int> vec_copy = vec;
