@@ -12,7 +12,7 @@ int merge_and_count(vector<int> &arr, int left, int mid, int right) {
     while(i <= mid && j <= right) {
         if(arr[i] <= arr[j]) { // Элементы расположены правильно
             temp[k++] = arr[i++];
-        } else { // Здесь возникает интересная пара
+        } else { // Здесь возникает интересная пара (i < j, a[i] > a[j])
             temp[k++] = arr[j++];
             count += (mid - i + 1); // Все элементы слева больше текущего элемента справа
         }
@@ -25,14 +25,14 @@ int merge_and_count(vector<int> &arr, int left, int mid, int right) {
     while(j <= right)
         temp[k++] = arr[j++];
     
-    // Копируем временный массив назад в оригинальный
+    // Временный массив назад в оригинальный
     for(int p = left; p <= right; ++p)
         arr[p] = temp[p-left];
     
     return count;
 }
 
-// Рекурсивная функция разделения массива и подсчета пар
+// Разделение массива и подсчета пар
 int count_pairs(vector<int> &arr, int left, int right) {
     if(left >= right)
         return 0;
@@ -43,7 +43,7 @@ int count_pairs(vector<int> &arr, int left, int right) {
     int x = count_pairs(arr, left, mid);
     int y = count_pairs(arr, mid+1, right);
     
-    // Объединение и подсчет перекрестных пар
+    // Объединение и подсчет пар
     int z = merge_and_count(arr, left, mid, right);
     
     return x+y+z;
@@ -52,9 +52,9 @@ int count_pairs(vector<int> &arr, int left, int right) {
 int main() {
     int n;
     cin >> n;
-    vector<int> arr; // = {1, 325, 654, 23, 748, 123, 67, 164, 120} ; 0 + 5 + 5 + 0 + 4 +2 + 1 = 17 
+    vector<int> arr = {1, 325, 654, 23, 748, 123, 67, 164, 120} ; //0 + 5 + 5 + 0 + 4 +2 + 1 = 17 
     
-    for(int i=0; i<n; ++i)
-        cin >> arr[i]; 
+    /*for(int i = 0; i < n; i++)
+        cin >> arr[i];  */
     cout << "Количество интересных пар: " << count_pairs(arr, 0, arr.size()-1) << endl;
 }
