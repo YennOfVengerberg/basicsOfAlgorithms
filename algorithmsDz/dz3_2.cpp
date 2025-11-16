@@ -52,9 +52,9 @@ int count_pairs(vector<int> &arr, int left, int right) {
 int main() {
     int n;
     cin >> n;
-    vector<int> arr = {1, 325, 654, 23, 748, 123, 67, 164, 120} ; //0 + 5 + 5 + 0 + 4 +2 + 1 = 17 
+    vector<int> arr; // = {1, 325, 654, 23, 748, 123, 67, 164, 120} ; //0 + 5 + 5 + 0 + 4 +2 + 1 = 17 
     
-    /*for(int i = 0; i < n; i++)
-        cin >> arr[i];  */
+    for(int i = 0; i < n; i++)
+        cin >> arr[i];  
     cout << "Количество интересных пар: " << count_pairs(arr, 0, arr.size()-1) << endl;
 }
