@@ -33,15 +33,17 @@ int main() {
         int result = 0;
         int maxim = 0;
         int minim = 10000000;
-        for(int i = 0; i < size; i++) {
+        vector<int> results;
+        for(int i = 1; i < size; i++) {
             for(int j = i+1; j < size; j++) {
                 maxim = max(*max_element(vec.begin(), vec.begin() + i), *max_element(vec.begin()+j, vec.end()));
                 minim = min(*min_element(vec.begin(), vec.begin() + i), *min_element(vec.begin()+j, vec.end()));
                 otr = *max_element(vec.begin()+i, vec.begin() + j) - *min_element(vec.begin()+i, vec.begin() + j);
+                results.push_back(maxim - minim + otr);
                 //result = max(max(result, temp), maxim(vec_copy) - minim(vec_copy)) ;
             }
         }
-        cout << endl << result + otr;
+        cout << endl << *max_element(results.begin(), results.end()) << endl;
     }
 }
 /* 

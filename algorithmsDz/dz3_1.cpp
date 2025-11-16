@@ -80,13 +80,13 @@ int main()
             if (elapsed < before && vec_copy == vec) {
                 before = elapsed;
                 threshold = i;
-                cout << before.count() << " "<< threshold << endl;
             }
             else if (vec_copy != vec) {
                 cerr << "Ошибка сортировки!" << endl;
                 break;
             }
         }
+        cout << before.count() << " m = "<< threshold << " для размера " << n << endl;
     }
     
     //cout << endl << "Отсортированный массив: "; 

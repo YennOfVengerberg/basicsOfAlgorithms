@@ -11,7 +11,7 @@ int main() {
     }
     int iter = 0;
     int one = 0, two = 0, res = 0;
-    for(int i = 0; i < arr.size();i++) {
+    for(int i = 1; i < arr.size();i++) {
         if (arr[i] == 1) {
             one++;
             if(arr[i] != arr[i-1]) {
