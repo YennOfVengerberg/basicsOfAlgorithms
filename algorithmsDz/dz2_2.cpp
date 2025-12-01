@@ -4,11 +4,10 @@
 using namespace std;
 
 int count_in_range(const vector<int> &frequencies, int l, int r) {
-    int vec_size = frequencies.size();
     if ( l == 0) {
-        return frequencies[min(r, vec_size)];
+        return frequencies[r];
     }
-    return frequencies[min(r, vec_size)] - frequencies[l-1];
+    return frequencies[r] - frequencies[l-1];
 }
 
 int main() {
@@ -31,8 +30,9 @@ int main() {
 
     for(; q > 0; q--) {
         int l, r;
-        cout << "set range l to r " << endl; // отрезок
+        cout << " set range l to r " << endl; // отрезок
         cin >> l >> r;
-        cout << count_in_range(prefix_sum, max(l, 0), max(r, 0));
+        int prefix_size = prefix_sum.size();
+        cout << endl << count_in_range(prefix_sum, max(l, 0), min(prefix_size-1, max(r, 0)));
     }
 }

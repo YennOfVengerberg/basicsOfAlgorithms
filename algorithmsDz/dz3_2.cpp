@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <random>
 using namespace std;
 
 // Функция вычисляет количество интересующих пар и одновременно сортирует массив
@@ -43,18 +44,32 @@ int count_pairs(vector<int> &arr, int left, int right) {
     int x = count_pairs(arr, left, mid);
     int y = count_pairs(arr, mid+1, right);
     
-    // Объединение и подсчет пар
+    // Объединение и подсчет перекрестных 
     int z = merge_and_count(arr, left, mid, right);
     
     return x+y+z;
 }
 
+int checker(vector<int> &vec) {
+    int check = 0;
+    for(int i = 0; i < vec.size(); i++) {
+        for(int j = 0; j < vec.size(); j++) {
+            if(i < j && vec[i] > vec[j]) {
+                check++;
+            }
+        }
+    }
+    return check;
+}
+
 int main() {
     int n;
+    cout << "Размер " << endl;
     cin >> n;
-    vector<int> arr; // = {1, 325, 654, 23, 748, 123, 67, 164, 120} ; //0 + 5 + 5 + 0 + 4 +2 + 1 = 17 
+    vector<int> arr(n); // = {1, 325, 654, 23, 748, 123, 67, 164, 120} ; //0 + 5 + 5 + 0 + 4 +2 + 1 = 17 
     
+    mt19937 mt(time(nullptr));
     for(int i = 0; i < n; i++)
-        cin >> arr[i];  
-    cout << "Количество интересных пар: " << count_pairs(arr, 0, arr.size()-1) << endl;
+        arr[i] = mt();  
+    cout << "Количество интересных пар: " << checker(arr) << " " << count_pairs(arr, 0, arr.size()-1) << endl;
 }
