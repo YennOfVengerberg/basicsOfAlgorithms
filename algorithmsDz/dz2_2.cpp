@@ -33,6 +33,6 @@ int main() {
         cout << " set range l to r " << endl; // отрезок
         cin >> l >> r;
         int prefix_size = prefix_sum.size();
-        cout << endl << count_in_range(prefix_sum, max(l, 0), min(prefix_size-1, max(r, 0)));
+        cout << endl << count_in_range(prefix_sum, min(prefix_size-1, max(l, 0)), min(prefix_size-1, max(r, 0)));
     }
 }
