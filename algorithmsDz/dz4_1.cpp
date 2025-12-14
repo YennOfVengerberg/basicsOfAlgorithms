@@ -32,7 +32,7 @@ void heapify(vector<int>& arr, int n, int i){
     }
 }
 
-void heapSort(vector<int>& arr){
+void heap_sort(vector<int>& arr) {
     int n = arr.size();
     for (int i = (n-2)/3; i >= 0; i--) {
         heapify(arr, n, i);
@@ -52,17 +52,10 @@ int main() {
         }
         vector<int> vec_copy = arr;
 
-        auto start = chrono::steady_clock::now();
         sort(vec_copy.begin(), vec_copy.end());
-        auto end = chrono::steady_clock::now();
-        chrono::duration<double> elapsed = end - start;
-        cout << "время для сорт " << elapsed.count() << " размер " << size << endl;
 
-        start = chrono::steady_clock::now();
-        heapSort(arr);
-        end = chrono::steady_clock::now();
-        elapsed = end - start;
-        cout << "время для хипсорт " << elapsed.count() << " размер " << size << endl;
+        heap_sort(arr);
+
         
         /* for (int i = 0; i < arr.size(); ++i)
             cout << arr[i] << " "; */

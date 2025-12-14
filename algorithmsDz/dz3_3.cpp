@@ -94,8 +94,6 @@ void checker_sq(vector<pair<int,int>> &vec, unsigned int S ) {
 }
 
 int main() {
-    
-    
     cout << " inp vec size " << endl;
     int size;
     cin >> size; 
